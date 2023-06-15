@@ -1,0 +1,23 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family:'Josefin Sans',sans-serif;
+
+}
+.carousel-inner img {
+    width: 100vw;
+    height: auto;
+  }
+
+.aboutimg{
+    width:100%;
+    aspect-ratio: 2;
+}
+.buysell{
+    max-height:500px ;
+}
+
+.imaag{
+    height: 350px;
+}

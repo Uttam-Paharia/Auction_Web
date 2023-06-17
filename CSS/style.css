@@ -21,3 +21,13 @@
 .imaag{
     height: 350px;
 }
+.navnet{
+    opacity:0.50;
+}
+
+.navnet:hover{
+    opacity: 1;
+}
+/* #venta{
+     height:70vw ;
+} */

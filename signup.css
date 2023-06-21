@@ -1,0 +1,105 @@
+.header{
+    text-align: center;
+    padding:20px;
+    font-weight:normal;
+    margin-bottom:20px;
+}
+.container{
+    width: 50%;
+    margin-inline: auto;
+    display:grid;
+    border: solid 1px rgb(200,200,200);
+    gap:0;
+    grid-template-columns:100%;
+    justify-content: left;
+    padding:10px;
+    grid-auto-rows:auto;
+    padding:20px;
+    
+}
+
+
+#name,#username,#password,#retype_password{
+    margin: 5px;
+}
+
+
+hr{
+    color: black;
+}
+
+.row{
+    width: 100%;
+}
+
+.one{
+    height: 0.5px;
+    width: 100%;
+    background-color: rgb(200,200,200);
+}
+input{
+    height:40px;
+    width:400px;
+    box-sizing: border-box;
+}
+#address{
+    height:100px;
+    width:400px;
+}
+textarea:focus{
+    border-color: pink;
+    outline:none;
+}
+input:focus {
+    border-color: pink;
+    outline: none;
+  }
+
+body{
+    font-family:sans-serif;
+}
+.error{
+    color:red;
+}
+#submit{
+    width:100px;
+    border-radius:10px;
+    background-color: #FFF0F5;
+    color:green;
+    font-weight:bold;
+}
+#submit:hover{
+    background-color: #E6E6FA;
+    color:black;
+}
+
+#characterCount {
+    font-size: 14px;
+    color: #888;
+  }
+
+  .exceeded {
+    color: red;
+  }
+
+#password{
+    display:inline-block;
+}
+
+.password-container {
+    display: flex;
+    align-items: center;
+}
+
+#password_tick {
+    margin-left: 10px;
+}
+#confirm_password_tick{
+    margin-left:15px;
+}
+@media all and (max-width: 980px) {
+    
+    .container{
+        width: 100%;
+    }
+  }

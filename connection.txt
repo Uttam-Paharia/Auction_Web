@@ -1,0 +1,63 @@
+<?php
+    $servername="localhost";
+    $username="root";
+    $password="";
+    $dbname="";
+    $conn=mysqli_connect($servername,$username,$password,$dbname);
+    if($conn){
+
+    };
+    
+/*
+
+    for including connection file
+    <?
+        include("file_name");
+        error_reporting(0);
+    ?>
+    
+    
+    
+    placeholder (html)
+    
+    
+
+    set name for all input types
+    
+    $variable=$_GET['write_name'];
+
+
+    $query_name="INSERT INTO table_name VALUES ('variable', 'varaible2')";
+    $data=mysqli_query($connection,$query_name)
+
+
+
+
+
+
+    //fetch data
+    include("connection.php");
+    error_reporting(0);
+    $query="select * from student";
+    $data=mysqli_query($conn,$query);
+    //$total=mysqli_num_rows($data);
+    $result=mysqli_fetch_assoc($data);
+
+
+
+
+
+    while($result=mysqli_fetch_assoc($data)){
+        
+    }
+
+
+
+
+    //for using post
+    //write in html part
+
+    <form action="" method="POST">
+
+
+    if(isset($_POST['submit']))

@@ -1,14 +1,15 @@
 body{
     font-family:sans-serif;
-    background-color: black;
-    /* background-image:linear-gradient(pink,white); */
+    background:linear-gradient(rgb(255, 192, 203,0.8),white);
+    background-attachment: fixed;
 }
 
 .header{
     text-align: center;
     padding:20px;
-    font-weight:normal;
+    font-weight:500;
     margin-bottom:20px;
+    color:rgb(82, 78, 78);
 }
 .container{
     width: 50%;
@@ -21,7 +22,8 @@ body{
     padding:10px;
     grid-auto-rows:auto;
     padding:20px;
-    background:brown;
+    background: rgb(255, 255, 255,0.7);
+    box-shadow: 5px 5px 20px black;
     
 }
 

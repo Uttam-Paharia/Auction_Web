@@ -111,11 +111,11 @@
             $sqlquery = "INSERT INTO table VALUES
     (DEFAULT, '$username', '$password','$phone','$email','$address',0,0,0)"
  
-if ($conn->query($sqlquery) === TRUE) {
-    echo "record inserted successfully";
-} else {
-    echo "Error: " . $sqlquery . "<br>" . $conn->error;
-}
+// if ($conn->query($sqlquery) === TRUE) {
+//     echo "record inserted successfully";
+// } else {
+//     echo "Error: " . $sqlquery . "<br>" . $conn->error;
+// }
             
         // }
     ?> 

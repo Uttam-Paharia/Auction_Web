@@ -1,0 +1,33 @@
+.dot {
+    line-height: 350px;
+  }
+
+  .container{
+    display:inline-flex;
+    gap:1px;
+    flex-direction: row;
+    flex-wrap:nowrap;
+    align-items:center;
+  }
+  .flex_item{
+    flex:0 0 350px;
+    
+  }
+  .two{
+    
+    font-size: 20px;
+  }
+
+  .one{
+    height: 350px;
+    width: 350px;
+    background-color: rgb(7, 209, 245);
+    display: inline-block;
+    text-align:center;
+    font-size: 280px;
+    margin:50px;
+    color:white;
+    border-radius: 50%;
+  }
+
+

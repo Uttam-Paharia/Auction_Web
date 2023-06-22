@@ -20,15 +20,52 @@ ini_set('display_errors', 1);
         $email = $_POST['email'];
         $address = $_POST['address'];
         
-        $query = "INSERT INTO user_details ( username, password, phone, email, address, total_shells, bidded_shells, unbidded_shells) VALUES 
-        ('$username', '$password', '$phone', '$email', '$address', 0, 0, 0)";
+        $query = "INSERT INTO user_details ( name,username, password, phone, email, address, total_shells, bidded_shells, unbidded_shells) VALUES 
+        ('$name','$username', '$password', '$phone', '$email', '$address', 0, 0, 0)";
         
         if ($conn->query($query) === TRUE) {
-            echo "Data inserted successfully.";
+            ;
         } else {
             echo "Error: " . $conn->error;
         }
+        $create_table_query="CREATE TABLE $username(
+            sno bigint AUTO_INCREMENT PRIMARY KEY,
+            product_id varchar(50),
+            product_name varchar(50),
+            sell_buy varchar(10),
+            to_person varchar(50),
+            is_sold varchar(5),
+            product_image varbinary(255),
+            product_description varchar(255),
+            base_price bigint,
+            current_price bigint
+        )";
+        $conn->query($create_table_query);
     }
+
+    function check_username($conn, $ch) {
+        $username_query = "SELECT COUNT(*) AS count FROM user_details WHERE username='$ch'";
+        $result = $conn->query($username_query);
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $count = $row['count'];
+    
+            if ($count > 0) {
+                // Username exists in the table
+                echo "Username already exists.";
+                $submit_button_type = "button";
+            } else {
+                // Username does not exist
+                $submit_button_type = "submit";
+            }
+        } else {
+            // Error executing the query
+            echo "Error: " . $conn->error;
+            $submit_button_type = "submit";
+        }
+        return $submit_button_type;
+    }
+    
 ?>
 
 <html>
@@ -54,7 +91,7 @@ ini_set('display_errors', 1);
                 <div class="column">
                     <h2 style="font-weight:normal;">ACCOUNT DETAILS</h2>
                     <label for="username">Username*</label><br>
-                    <input type="text" id="username" name="username" placeholder="Username" onChange="remove_error('username_error')"><br>
+                    <input type="text" id="username" name="username" placeholder="Username" onChange="getElementById('submit').type=<?php echo isset($_POST['username']) ? check_username($conn,$_POST['username']) : 'submit'; ?>;remove_error('username_error');check_username($conn,this.value);" oninput="getElementById('submit').type=<?php echo isset($_POST['username']) ? check_username($conn,$_POST['username']) : 'submit'; ?>"><br>
                     <p id="username_error" class="error"></p>
 
                     <label for="password">Password*</label><br>
@@ -99,3 +136,6 @@ ini_set('display_errors', 1);
     <!--footer  -->
 </body>
 </html>
+<?php
+    $conn->close();
+?>

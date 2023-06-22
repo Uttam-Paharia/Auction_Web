@@ -7,9 +7,10 @@ body{
 .header{
     text-align: center;
     padding:20px;
-    font-weight:500;
+    font-weight:600;
     margin-bottom:20px;
     color:rgb(82, 78, 78);
+    font-family:serif;
 }
 .container{
     width: 50%;

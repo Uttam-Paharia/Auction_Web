@@ -1,4 +1,18 @@
-<!DOCTYPE html>
+<?php
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $databasename = "AUA";
+  
+  // CREATE CONNECTION
+  $conn = new mysqli($servername, $username, $password, $databasename);
+  
+  // GET CONNECTION ERRORS
+  if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+  }
+  
+?>
 <html lang="en">
 
 <head>
@@ -9,7 +23,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="CSS/style.css">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
-    <link href="profile.css" rel="stylesheet">
+    <link href="profile.css?v=<?php echo time(); ?>" rel="stylesheet">
 
 </head>
 
@@ -48,54 +62,49 @@
       </form>
     </div>
   </nav>
-<div class="container">
+<div class="containerr">
     <div class="one flex_item">
-    <span class="dot">A</span>
+    <span class="dot" id="name_initial"></span>
     </div>
     <div class="two flex_item">
-        <p ><span style="font-weight:bold;">USERNAME:</span> anshikag020</p>
+        <p  id="username_display"></p>
+        <script>
+              let username='blah';
+              document.getElementById('username_display').innerHTML="<span style='font-weight:bold;'>USERNAME:</span> "+username;
+              document.getElementById('name_initial').innerHTML=username[0].toUpperCase();
+        </script>
         <?php
+      // SQL QUERY
+      $query = "SELECT total_shells, bidded_shells, unbidded_shells FROM `user_details` WHERE username='blah'";
+        
+      // FETCHING DATA FROM DATABASE
+      $result = $conn->query($query);
 
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $databasename = "AUA";
+      if ($result === false) {
+          die("Error retrieving data: " . $conn->error);
+      }
         
-        // CREATE CONNECTION
-        $conn = new mysqli($servername, $username, $password, $databasename);
+      if ($result->num_rows > 0) {
+          // OUTPUT DATA OF THE ROW
+          $row = $result->fetch_assoc();
+  
+          // Print the values of total_shells, bided_shells, and unbided_shells
+          $total_shells = $row['total_shells'];
+          $bidded_shells = $row['bidded_shells'];
+          $unbidded_shells = $row['unbidded_shells'];
+  
+          echo "Total shells: " . $total_shells . "<br>";
+          echo "Bid shells: " . $bidded_shells . "<br>";
+          echo "Unbid shells: " . $unbidded_shells . "<br>";
+      } else {
+          echo "No data found.";
+      }
         
-        // GET CONNECTION ERRORS
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        
-        // SQL QUERY
-        $query = "SELECT total_coin, bided_coin, unbided_coin FROM `user_details` WHERE username='jj'";
-        
-        // FETCHING DATA FROM DATABASE
-        $result = $conn->query($query);
-        
-        if ($result->num_rows == 1) {
-            // OUTPUT DATA OF THE ROW
-            $row = $result->fetch_assoc();
-        
-            // Print the values of total_coin, bided_coin, and unbided_coin
-            $totalCoin = $row['total_coin'];
-            $bidedCoin = $row['bided_coin'];
-            $unbidedCoin = $row['unbided_coin'];
-        
-            echo "Total Coin: " . $totalCoin . "<br>";
-            echo "Bided Coin: " . $bidedCoin . "<br>";
-            echo "Unbided Coin: " . $unbidedCoin . "<br>";
-        } else {
-            echo "0 results";
-        }
-        
-        $conn->close();
-        
-        ?>
+      $conn->close();
+    ?>
         
     </div>
+    
     <div class="three flex_item">
         <img src="projectimages/withdraw.png" style="width:300px;">
         <a  class="btn btn-success" style="margin:40px"> Click Here To Withdraw</a>
@@ -242,6 +251,7 @@
             <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+           
 </body>
 
 </html>

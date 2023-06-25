@@ -1,0 +1,192 @@
+.container{
+    display:grid;
+    grid-template-columns: 4fr 6fr;
+    grid-template-rows:1fr 1fr 2fr 1fr;/*in vh 20 20 40 20*/
+    /* border:black solid 1px; */
+    height:140vh;
+}
+.item-1{
+    display:flex;
+    grid-row: span 2;
+    align-items:center;
+    justify-content: center;
+    border:solid grey 0.5px;
+    border-radius:20px;
+}
+
+
+#image{
+    max-width:80%;
+    max-height:80%;
+    width:80%;    
+}
+
+.item-2{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items:center;
+}
+#header{
+    font-size:40px;
+    margin-bottom:0px;
+    margin-top:70px;
+}
+#company{
+    margin-top:40px;
+}
+.thematic-break{
+    border:0.1px rgb(200, 200, 200) solid;
+    width:80%;
+}
+#descri{
+    margin-top:25px;
+    margin-left:130px;
+    font-weight:bold;
+    font-size: 23px;
+}
+#description{
+    margin-left:200px;
+    margin-right:120px;
+}
+#curr{
+    margin-left:140px;
+    margin-right:70px;
+    margin-top:25px;
+}
+.item-5{
+    display:flex;
+    flex-direction:column;
+}
+.current{
+    display:flex;
+}
+#sea{
+    margin-top:26px;
+    margin-left:5px;
+}
+#myForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #inputField {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    height:80px;
+    width:300px;
+  }
+  
+  button[type="submit"] {
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    height:70px;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: rgb(128, 128, 128);
+    color:black;
+  }
+  
+  button[type="submit"]:focus {
+    outline: none;
+  }
+  #myForm{
+    margin-left:140px;
+    justify-content: left;
+  }
+  #current_bid{
+    margin-top:18px;
+    font-size:38px;
+  }
+  .form{
+    display:flex;
+  }
+  .base{
+    margin-left:140px;
+  }
+  #base_price{
+    margin-top:15px;
+    font-size:30px;
+    margin-left:100px;
+  }
+  .bass{
+    display:flex;
+  }
+#min_bid{
+    margin-top:15px;
+    font-size:30px;
+    margin-left:75px;
+}
+.thematic-break2{
+    border:0.1px rgb(200, 200, 200) solid;
+    width:80%;
+    margin-left:90px;
+}
+.seller{
+    display:grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows:1fr 1fr 1fr;
+}
+.item-7{
+    margin-top:0px;
+    margin-left:150px;
+    margin-bottom:30px;
+}
+.icons{
+    display:flex;
+    width:400px;
+    margin-bottom:30px;
+    gap:50px;
+    margin-top:15px;
+}
+.p{
+    color:rgb(84, 139, 84);
+    margin-left:12px;
+}
+.thematic-break3{
+    width:90%;
+    border:0.1px rgb(200, 200, 200) solid;
+    
+}
+.parallelogram{
+    width: 240px;
+	height: 35px;
+	transform: skew(-20deg);
+	background: rgb(14, 3, 95);
+    text-align: center;
+    padding-top:10px;
+}
+
+.item-4{
+    display:flex;
+    justify-content: center;
+    padding:30px;
+    font-size:50px;
+    font-weight:bold;
+
+}
+/* .icons>*{
+    flex-basis:400;
+} */
+/* media queries */
+#animation{
+    position:relative;
+    animation-name: pointer;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+@keyframes pointer{
+0% {left: 0px;}
+50% {left: 25px;}
+100% {left: 0px;}
+
+}

@@ -7,7 +7,8 @@
     $password = "";
     $dbname = "AUA";
     $conn = new mysqli($servername, $username, $password, $dbname);
-    
+    $count=0;
+    $correct = 0;
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
@@ -37,7 +38,7 @@
         // var_dump($query);
     
         if ($conn->query($query) === TRUE) {
-            ;
+            $count++;
         } else {
             echo "Error: " . $conn->error;
         }
@@ -58,7 +59,7 @@
   
           // Print the values of total_shells, bided_shells, and unbided_shells
           $sno = $row['sno'];
-
+          $count++;
         
       } else {
           echo "No data found.";
@@ -70,7 +71,7 @@
         product_name='$name' AND sell_buy='SELL' AND is_sold='NO' AND product_description='$description' AND base_price='$basePrice'";
         // var_dump($set_product_id_query);
         if ($conn->query($set_product_id_query) === TRUE) {
-          ;
+          $count++;
       } else {
           echo "Error: " . $conn->error;
       }
@@ -78,27 +79,40 @@
         $time=date('H:i:s', strtotime("+" . $auctionTime . " hours"));
 
         $objects_table_query = "INSERT INTO objects (product_id,product_name,post_time,auction_duration,bid_time_increase,product_image,base_price) VALUES (CONCAT('$username','@','$sno'),'$name',CURRENT_TIMESTAMP(),TIME('" . $time . "'),'$bidTime','$targetFile','$basePrice')";
+        $correct = 1;
         // var_dump($objects_table_query);
         if ($conn->query($objects_table_query) === TRUE) {
-          ;
+          $count++;
+          $jsCode=<<<EOT
+      <script>
+      after();
+      </script>
+      EOT;
+      echo $jsCode;
+      echo "Hello World";
       } else {
           echo "Error: " . $conn->error;
       }
-
+      
+      
     }
     $conn->close();
+    
+     
+    
 
 ?>
 <html>
 <head>
   <title>Post Your Ad</title>
-  <link rel="stylesheet" type="text/css" href="sell_page_2.css">
+  <link rel="stylesheet" type="text/css" href="sell_page_2.css?v=<?php echo time(); ?>">
   <link rel="icon" type="image/x-icon" href="projectimages/logo-white.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="CSS/style.css">
   <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="sell_page.css?v=<?php echo time(); ?>">
   <script>
     function countCharacters(input, countElementId, limit) {
       var countElement = document.getElementById(countElementId);
@@ -202,7 +216,7 @@
 
   <h1>Post Your Ad</h1>
   <div class="Padding_bottom">
-  <form action="" method="POST" enctype="multipart/form-data" onsubmit="return validateForm();">
+  <form  method="POST" enctype="multipart/form-data" onsubmit="return validateForm();" id="form">
     <label for="image">Product Image:</label>
     <input type="file" id="image" name="image" accept="image/*" required><br><br>
     <!-- <label for="files" class="btn">Select Image <i class="fa-solid fa-camera fa-lg"></i></label>
@@ -225,16 +239,55 @@
     <label for="basePrice">Base Price:</label>
     <input type="number" id="basePrice" name="basePrice" min="0" required><br><br>
 
-    <input  type="submit" value="Submit" >
+    <input id = 'submit' type="submit" value="Submit" >
   </form>
  
   </div>
+
+
+  <div class="container2" id="thanks" style="text-align:center;">
+    </div>
   <script src="https://kit.fontawesome.com/7f2dc18ea9.js" crossorigin="anonymous"></script>
 
   <!--navbar-->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function after(){
+      event.preventDefault();
+      document.getElementById('form').style.opacity="0.3";
+      document.getElementById('thanks').innerHTML="<h2 style='margin-top:10%; margin-bottom:3%;font-size:45px;color:green;font-weight:bold;'>Thank You</h2>"+
+        "<p style='font-size:25px;color:rgb(23, 198, 233);'>Your AD has been posted</p>"+
+        "<a href='index.html' ><button id='button'>Return to Home</button></a>"
+        document.getElementById('thanks').style="position:fixed;"+
+    "top:25%;"+
+    "left:25%;"+
+    "border: solid 10px black;"+
+    "border-style:inset;"+
+    "border-radius:20px;"+
+    "background-color:rgb(235, 235, 235);"+
+    "height:50vh;"+
+    "width:50vw;"+
+    /* transform:translate(-50%,-50%); */
+    "box-shadow: 5px 5px 20px black;"
+    
+    }
+    
+  </script>
+  <!-- <script>
+    document.querySelector('#submit').addEventListener('click' , function(event){
+      console.log('Hello Anshika')
+      let str= "<?php echo $correct?>";
+      // let len = str.length;
+     console.log(str);
+      if(str[0] == "1")
+      {
+        after();
+      }
+      // event.preventDefault();
+    })
+    </script> -->
  
 </body>
 </html>

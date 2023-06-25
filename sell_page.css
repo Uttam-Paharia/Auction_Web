@@ -1,0 +1,15 @@
+
+#button{
+    border:green solid 1px;
+    border-radius:6px;
+    height:40px;
+    width:200px;
+    font-size:large;
+    margin-top:25px;
+    background-color:green;
+    color:white;
+}
+#button:hover{
+    background-color:lightgreen;
+    color:black;
+}

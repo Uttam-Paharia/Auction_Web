@@ -1,0 +1,118 @@
+body{
+    background-color: blue !important;
+}
+.rect1{
+    background-color:rgb(210, 180, 11);
+    height:170px;
+    width:9.9vw;
+    margin-top:40vh;
+    margin-left:0px;
+    position:absolute;
+}
+.rect2{
+    position:absolute;
+    background-color:rgb(210, 180, 11);
+    height:170px;
+    width:9.7vw;
+    margin-top:18vh;
+    right:0;
+}
+.main{
+    background-color:white;
+    width:80vw;
+    height:70vh;
+    margin-top:8%;
+    margin-left:10%;
+}
+.initial{
+    position:absolute;
+    width:30vw;
+    height:70vh;
+    background-color:rgb(210,180,11);
+    margin-left:5%;
+    margin-top:5%;
+}
+#initial{
+    color:white;
+    font-size:450px;
+    font-weight:800;
+    margin-top:-55px;
+    margin-left:48px;
+}
+.info{
+    /* background-color: pink; */
+    height:60vh;
+    width:35vw;
+    position:absolute;
+    margin-top:3%;
+    margin-left:40%
+}
+.container{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top:10%
+
+}
+/* .container>*{
+    border:1px solid black;
+} */
+.item{
+    font-weight:bold;
+    font-size:18px;
+}
+.black{
+    background-color:black;
+    margin-top:25vh;
+
+}
+#withdraw{
+    margin-top:10vh;
+    margin-left:20vw;
+    margin-bottom:10vh;
+    border-radius:200px;
+}
+#withdraw:hover{
+    cursor: pointer;
+    height:400px;
+}
+#deposit{
+    margin-top:10vh;
+    margin-left:17vw;
+    margin-bottom:10vh;
+    border-radius: 200px;
+}
+#deposit:hover{
+    cursor:pointer;
+    height:400px;
+}
+#myForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #inputField {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  button[type="submit"]:focus {
+    outline: none;
+  }
+  

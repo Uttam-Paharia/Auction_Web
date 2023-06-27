@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $address = $_POST['address'];
+    
 
     $query = "INSERT INTO user_details ( name,username, password, phone, email, address, total_shells, bidded_shells, unbidded_shells) VALUES 
     ('$name','$username', '$password', '$phone', '$email', '$address', 0, 0, 0)";
@@ -35,10 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         sell_buy varchar(10),
         to_person varchar(50),
         is_sold varchar(5),
-        product_image varbinary(255),
+        image_ext varchar(10),
         product_description varchar(255),
         base_price bigint,
-        current_price bigint
+        current_price bigint DEFAULT 0,
+        post_time datetime
     )";
     $conn->query($create_table_query);
 }

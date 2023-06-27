@@ -190,3 +190,9 @@
 100% {left: 0px;}
 
 }
+
+.error{
+    display:flex;
+    color:red;
+    margin-left:200px;
+}

@@ -69,7 +69,7 @@
     ></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color:rgb(210,180,11) !important;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
       <a class="navbar-brand" href="projectimages/logo-white.png"
         ><img
           src="projectimages/logo-white.png"

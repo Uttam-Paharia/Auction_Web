@@ -22,19 +22,13 @@
         $bidTime = $_POST['bidTime'];
         $basePrice = intval($_POST['basePrice']);
         $username='blah';     //set this
+        $currentDateTime = date('Y-m-d H:i:s');
 
-        $targetDir = "uploads/"; // Directory where the uploaded images will be stored
-        $targetFile = $targetDir . basename($_FILES["image"]["name"]);
-        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-        $allowedTypes = array("jpg", "jpeg", "png", "gif");
-        if (!in_array($imageFileType, $allowedTypes)) {
-          exit;
-        }
-        move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile);
+      
         // var_dump($name, $description, $auctionTime, $bidTime, $basePrice,  $targetFile);
 
-        $query = "INSERT INTO $username (product_name,sell_buy,is_sold,product_image,product_description,base_price) VALUES 
-        ('$name','SELL', 'NO', '$targetFile', '$description', '$basePrice')";
+        $query = "INSERT INTO $username (product_name,sell_buy,is_sold,product_description,base_price, post_time) VALUES 
+        ('$name','SELL', 'NO', '$description', '$basePrice','$currentDateTime')";
         // var_dump($query);
     
         if ($conn->query($query) === TRUE) {
@@ -43,7 +37,7 @@
             echo "Error: " . $conn->error;
         }
         $query2 = "SELECT sno FROM $username WHERE
-        product_name='$name' AND sell_buy='SELL' AND is_sold='NO' AND product_description='$description' AND base_price='$basePrice'";
+        product_name='$name' AND sell_buy='SELL' AND is_sold='NO' AND product_description='$description' AND base_price='$basePrice' AND post_time='$currentDateTime'";
         
       // FETCHING DATA FROM DATABASE
       // var_dump($query2);
@@ -64,10 +58,17 @@
       } else {
           echo "No data found.";
       }
-        
-      
+      $product_id=$username.'@'.$sno;
+      $targetDir = "uploads/"; // Directory where the uploaded images will be stored
+      $targetFile = $targetDir . $product_id. '.' . $imageFileType;
+      $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+      $allowedTypes = array("jpg", "jpeg", "png", "gif");
+      if (!in_array($imageFileType, $allowedTypes)) {
+        exit;
+      }
+      move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile);
 
-        $set_product_id_query="UPDATE $username SET product_id=CONCAT('$username','@','$sno') WHERE
+        $set_product_id_query="UPDATE $username SET product_id=CONCAT('$username','@','$sno') , image_ext='$imageFileType' WHERE
         product_name='$name' AND sell_buy='SELL' AND is_sold='NO' AND product_description='$description' AND base_price='$basePrice'";
         // var_dump($set_product_id_query);
         if ($conn->query($set_product_id_query) === TRUE) {
@@ -76,9 +77,13 @@
           echo "Error: " . $conn->error;
       }
 
-        $time=date('H:i:s', strtotime("+" . $auctionTime . " hours"));
+        // $time=date('H:i:s', strtotime("+" . $auctionTime . " hours"));
+        // TIME('" . $time . "')
+        $auction_time;
+        if($auctionTime>=10) $auction_time=((string)$auctionTime.':00:00');
+        else $auction_time=('0'.(string)$auctionTime.':00:00');
 
-        $objects_table_query = "INSERT INTO objects (product_id,product_name,post_time,auction_duration,bid_time_increase,product_image,base_price) VALUES (CONCAT('$username','@','$sno'),'$name',CURRENT_TIMESTAMP(),TIME('" . $time . "'),'$bidTime','$targetFile','$basePrice')";
+        $objects_table_query = "INSERT INTO objects (product_id,product_name,post_time,auction_duration,bid_time_increase,product_image,base_price,img_ext) VALUES (CONCAT('$username','@','$sno'),'$name',CURRENT_TIMESTAMP(),$auction_time,'$bidTime','$targetFile','$basePrice',$imageFileType)";
         $correct = 1;
         // var_dump($objects_table_query);
         if ($conn->query($objects_table_query) === TRUE) {
@@ -275,19 +280,7 @@
     }
     
   </script>
-  <!-- <script>
-    document.querySelector('#submit').addEventListener('click' , function(event){
-      console.log('Hello Anshika')
-      let str= "<?php echo $correct?>";
-      // let len = str.length;
-     console.log(str);
-      if(str[0] == "1")
-      {
-        after();
-      }
-      // event.preventDefault();
-    })
-    </script> -->
+  
  
 </body>
 </html>

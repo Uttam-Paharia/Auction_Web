@@ -63,7 +63,8 @@ body{
 .black{
     background-color:black;
     margin-top:25vh;
-
+    padding-bottom:5vh;
+    
 }
 #withdraw{
     margin-top:10vh;
@@ -115,4 +116,11 @@ body{
   button[type="submit"]:focus {
     outline: none;
   }
-  
+  #form{
+    margin-top:10vh;
+    margin-left:13vw;
+  }
+  .gridd{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+  }

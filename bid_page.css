@@ -1,0 +1,103 @@
+#image_top{
+    justify-content: center;
+    top:0;
+    margin:0;
+    padding:0;
+    position:relative;
+    z-index: 1;
+}
+
+.top{
+    display:flex;
+    justify-content: center;
+    background-color: black;
+    height:fit-content;
+    margin-left:0px;
+    margin-top:0px;
+    padding:0px;
+    margin-bottom:40px;
+}
+.dot {
+    height: 300px;
+    width: 450px;
+    background-color:white;
+    border-radius: 150px;
+    display: inline-block;
+    margin-left:0vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+
+    justify-content: center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    font-size:60px;
+    font-weight:800;
+
+  }
+  .bid_on{
+    margin:0px;
+    padding:0px;
+    margin-left:50px;
+    margin-right:30px;
+    color:rgb(15, 11, 57)
+  }
+  .grid{
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    display:grid;
+    margin-top:100px;
+    margin-left:40px
+  }
+
+  .product{
+    display:flex;
+    flex-direction:column;
+    height:400px;
+    width:300px;
+    /* border-left: solid rgb(200,200,200) 0.5px;
+    border-bottom:solid rgb(200,200,200) 0.5px; */
+    align-items: left;
+    margin-top:20px;
+}
+.image{
+    width:250px;
+    margin-top: 40px;
+    max-height:200px;
+}
+.image:hover{
+    width:300px;
+    margin-top:5px;
+}
+.product:hover{
+    cursor:pointer;
+    margin-top:0px;
+
+}
+.base_price{
+    /* background-color:rgb(224, 6, 6); */
+    border-radius:20px;
+    height:30px;
+    width:fit-content;
+    margin-top:30px;  
+    align-self: left;  
+    display:flex;
+    margin-bottom:0px;
+}
+#base_price{
+    margin:20px;
+    padding-top:10px;
+    font-size:20px;
+    font-weight:bold;
+}
+#current_bid{
+    margin-top:30px;
+    font-size:50px;
+    margin-bottom:0px;
+}
+a{
+    text-decoration: none;
+    color:black;
+}

@@ -12,7 +12,7 @@ body{
     color:rgb(82, 78, 78);
     font-family:serif;
 }
-.container{
+.containerr{
     width: 50%;
     margin-inline: auto;
     display:grid;

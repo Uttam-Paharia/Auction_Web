@@ -1,4 +1,4 @@
-.container{
+.containerr{
     display:grid;
     grid-template-columns: 4fr 6fr;
     grid-template-rows:1fr 1fr 2fr 1fr;/*in vh 20 20 40 20*/

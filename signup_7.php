@@ -1,7 +1,6 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -34,15 +33,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         product_id varchar(50),
         product_name varchar(50),
         sell_buy varchar(10),
-        to_person varchar(50),
+        to_person varchar(50) DEFAULT '0',
         is_sold varchar(5),
         image_ext varchar(10),
         product_description varchar(255),
         base_price bigint,
-        current_price bigint DEFAULT 0,
-        post_time datetime
+        post_time datetime,
+        to_person_phone bigint
     )";
     $conn->query($create_table_query);
+    session_start();
+    $_SESSION['username']=$username;
+    header("location: index.php");
 }
 
 // function check_username($conn, $ch) {
@@ -73,14 +75,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    <link rel="icon" type="image/x-icon" href="projectimages/logo-white.png">
+
     <!-- <link rel="stylesheet" href="signup.css"> -->
     <link rel="stylesheet" href="signup.css?v=<?php echo time(); ?>">
+    <style>
+        body {
+            background-image: url('projectimages/signin_background.png');
+            background-size: cover;
+        }
+    </style>
 </head>
 
 <body>
     <!--navbar-->
     <h1 class="header">SIGN UP</h1>
-    <div class="container"> 
+    <div class="containerr"> 
         <form id="signup-form" action="" method="POST">
             <div class="row">
                 <div class="column">
@@ -142,7 +152,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
 
         </form>
+        <a href='signin.php' style="margin-top:20px;">Already have an account? Sign In</a>
     </div>
+    <footer class="bg-light text-center text-lg-start"style="bottom:0px; width:100vw; margin-top:30px;">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); height:5vh;color:brown;padding-top:10px;padding-left:45vw;" >
+    AUA- AUA Unlimited Auction
+  </div>
+  <!-- Copyright -->
+</footer>
+    
     <script src="signup_2.js"></script>
     <script src="https://kit.fontawesome.com/7f2dc18ea9.js" crossorigin="anonymous"></script>
     <!--footer  -->

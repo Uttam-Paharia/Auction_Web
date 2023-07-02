@@ -106,9 +106,11 @@
     </div>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-6 col-md-6 col-12 buysell">
+      <div class="col-lg-1 col-md-1 col-0 buysell">
+     </div>
+        <div class="col-lg-4 col-md-4 col-6 buysell">
           <div class="card buysell">
-            <img class="card-img-top imaag" src="projectimages/image4_bid.jpg" alt="Card image">
+            <img class="card-img-top imaag" src="projectimages/Bid.jpg" alt="Card image" >
             <div class="card-body">
               <h4 class="card-title">BID</h4>
               <p class="card-text"> Outbid the rest. Claim your treasure. </p>
@@ -116,16 +118,20 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-12 buysell">
+        <div class="col-lg-2 col-md-2 col-0 buysell">
+     </div>
+        <div class="col-lg-4 col-md-4 col-6 buysell">
           <div class="card buysell">
-            <img class="card-img-top imaag" src="projectimages/image5_sell.jpg" alt="Card image">
+            <img class="card-img-top imaag" src="projectimages/Sell.jpg" alt="Card image" >
             <div class="card-body">
               <h4 class="card-title">SELL</h4>
-              <p class="card-text">Unlock the value. Sell with AUA Unlimited Auction."</p>
+              <p class="card-text">Unlock the value. Sell with AUA Unlimited Auction.</p>
               <a href="sell_page_4.php" class="btn btn-primary">Sell Now</a>
             </div>
           </div>
         </div>
+        <div class="col-lg-1 col-md-1 col-0 buysell">
+     </div>
 
       </div>
     </div>

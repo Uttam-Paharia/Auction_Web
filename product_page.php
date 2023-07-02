@@ -60,9 +60,11 @@ $username_seller = substr($product_id, 0, strpos($product_id, '@'));
 $name;
 $phone;
 $address;
+$product_description;
 
 
-$query = "SELECT name ,phone ,address FROM `user_details` WHERE username='$username_seller'";
+
+$query = "SELECT name ,phone ,address  FROM `user_details` WHERE username='$username_seller'";
 
 // FETCHING DATA FROM DATABASE
 $result = $conn->query($query);
@@ -79,11 +81,18 @@ if ($result->num_rows > 0) {
     $name = $row['name'];
     $phone = $row['phone'];
     $address = $row['address'];
-
+    
+    
 } else {
     echo "No data found2.";
 }
+$query = "SELECT product_description FROM `$username_seller` where product_id='$product_id'";
+$result = $conn->query($query);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $product_description=$row['product_description'];
 
+}
 
 ?>
 <!-- place bid validation
@@ -99,6 +108,7 @@ $bid;
 $to_person;
 $query = "SELECT to_person FROM `$username_seller` where product_id='$product_id'";
 $result = $conn->query($query);
+
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $to_person = $row['to_person'];
@@ -149,6 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Calculate the time left for the auction
     if ($currentTime >= $endTime) {
         $showError0 = "The auction has ended";
+        $error=1;
     }
 
     if ($bid == "" && $showError0 == false) {
@@ -197,8 +208,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $unbidded_shells_now;
         $bidded_shells_prev;
         $bidded_shells_now;
+        $bid_time_increase; // Number of minutes to increase the auction duration
 
-        $query = "SELECT current_price, auction_duration FROM `objects` WHERE product_id='$product_id'";
+        $query = "SELECT current_price, auction_duration,bid_time_increase FROM `objects` WHERE product_id='$product_id'";
         $result = $conn->query($query);
 
         if ($result === false) {
@@ -211,6 +223,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $current_price = $row['current_price'];
             $auction_duration = $row['auction_duration'];
+            $bid_time_increase=$row['bid_time_increase'];
 
         } else {
             echo "No data found.";
@@ -256,8 +269,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $query = "UPDATE  `user_details` SET unbidded_shells =$unbidded_shells_now,bidded_shells=$bidded_shells_now WHERE username='$username' ";
         $conn->query($query);
         $current_price = $bid;
-        $auction_duration; // Auction duration in time format (H:m:s)
-        $bid_time_increase; // Number of minutes to increase the auction duration
+
 
         // Split auction duration into hours, minutes, and seconds
         list($hours, $minutes, $seconds) = explode(':', $auction_duration);
@@ -281,7 +293,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $query = "UPDATE `objects` SET current_price='$current_price',auction_duration='$auction_duration' WHERE product_id='$product_id'";
         $conn->query($query);
         $to_person = $username;
-        $query = "UPDATE `username_seller` SET to_person='$to_person'WHERE product_id='$product_id' ";
+        $query = "UPDATE `$username_seller` SET to_person='$to_person'WHERE product_id='$product_id' ";
+        $conn->query($query);
         $login = true;
         header("location: product_page.php?product_id=$product_id");
 
@@ -356,7 +369,7 @@ else if ($showError3) {
     <title>
         <?php echo $product_name; ?>
     </title>
-    
+    <link rel="icon" type="image/x-icon" href="projectimages/logo-white.png">
 </head>
 
 <body>
@@ -385,7 +398,8 @@ else if ($showError3) {
                     <a class="nav-link" href="sell_page_4.php">Sell</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="profile_2.php" title="<?php echo "Hello ".$_SESSION['username']; ?>"><i class="fa-solid fa-user" style="color: #99c1f1;font-size:30px;"></i></a>                </li>
+                <a class="nav-link" href="profile_2.php" title="<?php echo "Hello ".$_SESSION['username']; ?>"><i class="fa-solid fa-user" style="color: #99c1f1;font-size:30px;"></i></a>            
+                  </li>
             </ul>
            
     </div>
@@ -408,9 +422,9 @@ else if ($showError3) {
         </div>
         <div class="item-3">
             <p id="descri">Description:<br></p>
-            <p id="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum deleniti beatae modi
-                cupiditate officia nisi quas, reprehenderit fugit. Eligendi accusantium consequatur facilis quia maiores
-                dolore nisi saepe voluptate, quisquam doloribus.</p>
+            <p id="description"><?php
+            echo $product_description;
+            ?></p>
         </div>
         <div class="item-4">
             <p id='timer'>00:00:00</p>
@@ -554,6 +568,10 @@ else if ($showError3) {
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/4a8a1a882e.js"
+      crossorigin="anonymous"
+    ></script>
 </body>
 
 </html>

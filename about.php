@@ -134,9 +134,9 @@
         <h2 style="margin-top: 10vh;">SHELLS</h2>
         <div class="row" style="background-color: lightgrey; margin-top:3vh;">
           <div class="col-lg-6 col-md-6 col-12" style="text-align: center;">
-            <img src="projectimages/seashell.png" class="img-fluid aboutimg blahblah" />
+            <img src="projectimages/seashell.png" style="width:30vw;height:40vh" />
           </div>
-          <div class="col-lg-6 col-md-6 col-12">
+          <div class="col-lg-6 col-md-6 col-12"style="margin-top:30px;">
             <p>
               Looking at the same old boring notes gets a little dull, huh? We thought so too, which is why we decided
               to make our own, super fancy, absolutely incredible form of currency. Cut to, drum roll please...

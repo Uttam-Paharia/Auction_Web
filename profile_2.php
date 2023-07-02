@@ -20,8 +20,8 @@ if ($conn->connect_error) {
 
 <?php
 // SQL QUERY
-$done=false;
-$error=false;
+$done = false;
+$error = false;
 $name;
 $total_shells;
 $bidded_shells;
@@ -70,11 +70,13 @@ if ($result->num_rows > 0) {
   <link rel="icon" type="image/x-icon" href="projectimages/logo-white.png">
 
   <link rel="stylesheet" href="profile_2.css?v=<?php echo time(); ?>">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css?v=<?php echo time(); ?>" />
   <script src="https://kit.fontawesome.com/4a8a1a882e.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
 </head>
 
 <body>
@@ -101,145 +103,146 @@ if ($result->num_rows > 0) {
           <a class="nav-link" href="sell_page_4.php">Sell</a>
         </li>
         <li class="nav-item active">
-        <a class="nav-link" href="profile_2.php" title="<?php echo "Hello ".$_SESSION['username']; ?>"><span class="sr-only">(current)</span><i class="fa-solid fa-user" style="color: #99c1f1;font-size:30px;"></i></a>
+          <a class="nav-link" href="profile_2.php" title="<?php echo "Hello " . $_SESSION['username']; ?>"><span
+              class="sr-only">(current)</span><i class="fa-solid fa-user"
+              style="color: #99c1f1;font-size:30px;"></i></a>
         </li>
       </ul>
     </div>
   </nav>
-  <div class="rect1"></div>
-  <div class="rect2"></div>
-  <div class="main">
-    <div class="initial">
-      <p id="initial">A</p>
-    </div>
-    <div class="info">
-      <div class="container">
-        <div class="item">
-          <p>Name</p>
-        </div>
-        <div id="Name">
-          <p>
-            <?php echo $name ?>
-          </p>
-        </div>
-        <div class="item">
-          <p>Total Shells</p>
-        </div>
-        <div id="Total_shells">
-          <p>
-            <?php echo $total_shells ?>
-          </p>
-        </div>
-        <div class="item">
-          <p>Bid Shells</p>
-        </div>
-        <div id="bid_shells">
-          <p>
-            <?php echo $bidded_shells ?>
-          </p>
-        </div>
-        <div class="item">
-          <p>Unbid Shells</p>
-        </div>
-        <div id="unbid_shells">
-          <p>
-            <?php echo $unbidded_shells ?>
-          </p>
-        </div>
-        <div class="item">
-          <p>Email</p>
-        </div>
-        <div id="email">
-          <p>
-            <?php echo $email ?>
-          </p>
-        </div>
-        <div class="item">
-          <p>Phone</p>
-        </div>
-        <div id="phone">
-          <p>
-            <?php echo $phone ?>
-          </p>
-        </div>
-        <div class="item">
-          <p>Address</p>
-        </div>
-        <div id="address">
-          <p>
-            <?php echo $address ?>
-          </p>
-        </div>
-       <a href="history.php"> <button style="width:10vw;margin-top:10px; padding:5px;" >history</button></a>
+  <!-- <div class="rect1"></div>
+  <div class="rect2"></div> -->
+  <div class="outer">
+    <div class="main" style="border-width: thick;">
+      <div class="initial">
+        <p id="initial"">A</p>
+      </div>
+      <div class="info">
+        <div class="container">
+          <div class="item">
+            <p>Name</p>
+          </div>
+          <div id="Name">
+            <p>
+              <?php echo $name ?>
+            </p>
+          </div>
+          <div class="item">
+            <p>Total Shells</p>
+          </div>
+          <div id="Total_shells">
+            <p>
+              <?php echo $total_shells ?>
+            </p>
+          </div>
+          <div class="item">
+            <p>Bid Shells</p>
+          </div>
+          <div id="bid_shells">
+            <p>
+              <?php echo $bidded_shells ?>
+            </p>
+          </div>
+          <div class="item">
+            <p>Unbid Shells</p>
+          </div>
+          <div id="unbid_shells">
+            <p>
+              <?php echo $unbidded_shells ?>
+            </p>
+          </div>
+          <div class="item">
+            <p>Email</p>
+          </div>
+          <div id="email">
+            <p>
+              <?php echo $email ?>
+            </p>
+          </div>
+          <div class="item">
+            <p>Phone</p>
+          </div>
+          <div id="phone">
+            <p>
+              <?php echo $phone ?>
+            </p>
+          </div>
+          <div class="item">
+            <p>Address</p>
+          </div>
+          <div id="address">
+            <p>
+              <?php echo $address ?>
+            </p>
+          </div>
+          <a href="history.php"> <button style="width:10vw;margin-top:10px; padding:5px; border-radius: 10px;">history</button></a>
 
+        </div>  
+      </div>
+    </div>
+    <div class="right">
+      <div class="flex">
+        <img src="projectimages/withdraw.png" id="withdraw" height=200px; width=300px; title="CLick to withdraw"
+          onclick="withdraw()">
+        <p>Withdraw</p>
+        <form id="myForm" method="POST">
+
+        </form>
+        <img src="projectimages/deposit.png" id="deposit" height=200px width=300px; title="Click to deposit"
+          onclick="deposit()">
+        <p>Deposit</p>
+        <form id="myForm2" method="POST">
+
+        </form>
       </div>
     </div>
   </div>
-  <div class="black">
-    <div class="gridd">
-    <div>
-      <img src="projectimages/withdraw.png" id="withdraw" height=300px title="CLick to withdraw" onclick="withdraw()">
-    </div>
-    <div>
-      <img src="projectimages/deposit.png" id="deposit" height=300px title="Click to deposit" onclick="deposit()">
-    </div>
-    <div>
-      <p style="margin-left:27vw;color:white;font-size:25px;" >Withdraw</p>
-    </div>
-    <div>
-      <p style="margin-left:27vw;color:white;font-size:25px;" >Deposit</p>
 
-    </div>
-</div>
-    <div id="form">
-      <form id="myForm" method="POST">
-        
-      </form>
-    </div>
 
-    </div>
+  </div>
   <script>
     let username = "<?php echo $profile_username; ?>";
     //   document.getElementById('username_display').innerHTML="<span style='font-weight:bold;'>USERNAME:</span> "+username;
     document.getElementById('initial').innerHTML = username[0].toUpperCase();
   </script>
   <script>
-function withdraw(){
-  let text='<input type="text" id="inputField" placeholder="Enter a value" name="withdraw"><button type="submit" >Withdraw</button>';
-  document.getElementById('myForm').innerHTML=text;
-}
-function deposit(){
-  let text='<input type="text" id="inputField" placeholder="Enter a value" name="deposit"><button type="submit">Deposit</button>';
-  document.getElementById('myForm').innerHTML=text;
-}
+    function withdraw() {
+      let text = '<input type="text" id="inputField" placeholder="Enter a value" name="withdraw"><button type="submit" >Withdraw</button>';
+      document.getElementById('myForm').innerHTML = text;
+    }
+    function deposit() {
+      let text = '<input type="text" id="inputField" placeholder="Enter a value" name="deposit"><button type="submit">Deposit</button>';
+      document.getElementById('myForm2').innerHTML = text;
+    }
 
-    </script>
-    <?php
+  </script>
+  <?php
   if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if(isset($_POST['withdraw'])){
-    
-      $withdraw=$_POST['withdraw'];
-      if($withdraw<=$unbidded_shells && $withdraw>=0){
-        $unbidded_shells-=$withdraw;
-        $total_shells-=$withdraw;
-        $query="UPDATE `user_details` SET unbidded_shells=$unbidded_shells,total_shells=$total_shells WHERE username='$profile_username'";
+    if (isset($_POST['withdraw'])) {
+
+      $withdraw = $_POST['withdraw'];
+      if ($withdraw <= $unbidded_shells && $withdraw >= 0) {
+        $unbidded_shells -= $withdraw;
+        $total_shells -= $withdraw;
+        $query = "UPDATE `user_details` SET unbidded_shells=$unbidded_shells,total_shells=$total_shells WHERE username='$profile_username'";
         $conn->query($query);
         $done = true;
+      } else {
+        $error = true;
       }
-      else{
-        $error=true;
-      }
-      
-    }
-    if(isset($_POST['deposit'])){
-      $deposit=$_POST['deposit'];
-      $unbidded_shells+=$deposit;
-        $total_shells+=$deposit;
-      $query="UPDATE `user_details` SET unbidded_shells=$unbidded_shells,total_shells=$total_shells WHERE username='$profile_username'";
-        $conn->query($query);
-      $done=true;
+      $withdraw = 0;
 
     }
+    if (isset($_POST['deposit'])) {
+      $deposit = $_POST['deposit'];
+      $unbidded_shells += $deposit;
+      $total_shells += $deposit;
+      $query = "UPDATE `user_details` SET unbidded_shells=$unbidded_shells,total_shells=$total_shells WHERE username='$profile_username'";
+      $conn->query($query);
+      $done = true;
+
+    }
+    $deposit = 0;
     // header("location: profile_2.php");
   }
   if ($done) {
@@ -249,17 +252,17 @@ function deposit(){
             <span aria-hidden="true">&times;</span>
         </button>
     </div> ';
-}
-if ($error) {
-  echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  }
+  if ($error) {
+    echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
       <strong>Unsuccessful! Enter a valid value.</strong> 
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
       </button>
   </div> ';
-}
-?>
- <script src="https://kit.fontawesome.com/4a8a1a882e.js" crossorigin="anonymous"></script>
+  }
+  ?>
+  <script src="https://kit.fontawesome.com/4a8a1a882e.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>

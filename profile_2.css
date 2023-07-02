@@ -1,7 +1,7 @@
-body{
+/* body{
     background-color: blue !important;
-}
-.rect1{
+} */
+/* .rect1{
     background-color:rgb(210, 180, 11);
     height:170px;
     width:9.9vw;
@@ -16,28 +16,47 @@ body{
     width:9.7vw;
     margin-top:18vh;
     right:0;
+} */
+
+.outer{
+    display:grid;
+    grid-template-columns: 4fr 1.3fr;
+    gap:0px;
+}
+.right{
+    display:flex;
+    flex-direction: column;
 }
 .main{
     background-color:white;
-    width:80vw;
+    width:75vw;
     height:70vh;
-    margin-top:8%;
-    margin-left:10%;
+    margin-top:6%;
+    margin-left:1%;
+    border: grey 0.2px solid;
+    border-radius:35px;
 }
 .initial{
     position:absolute;
     width:30vw;
-    height:70vh;
-    background-color:rgb(210,180,11);
-    margin-left:5%;
-    margin-top:5%;
+    height:60vh;
+    border-radius: 50%;
+    border-width: thin;
+    border-color: black;
+    background-color:rgb(145, 140, 140);
+    margin-left:4%;
+    margin-top:2%;
+    margin-right:4%;
+    margin-bottom:2%;
+    padding-bottom: 25%;
 }
 #initial{
     color:white;
     font-size:450px;
     font-weight:800;
-    margin-top:-55px;
-    margin-left:48px;
+    text-align: center; 
+    transform: translate(0, -60px);
+    font-family:     'Montserrat', sans-serif;
 }
 .info{
     /* background-color: pink; */
@@ -66,32 +85,41 @@ body{
     padding-bottom:5vh;
     
 }
+.flex{
+    display:flex;
+    flex-direction:column;
+    text-align: center;
+}
 #withdraw{
-    margin-top:10vh;
-    margin-left:20vw;
-    margin-bottom:10vh;
+    margin-top:9vh;
+    margin-left:0.4vw;
+    margin-bottom:1vh;
     border-radius:200px;
 }
 #withdraw:hover{
     cursor: pointer;
-    height:400px;
+    
 }
 #deposit{
-    margin-top:10vh;
-    margin-left:17vw;
-    margin-bottom:10vh;
-    border-radius: 200px;
+    margin-top:4vh;
+    margin-left:0.4vw;
+    margin-bottom:1vh;
+    border-radius:200px;
 }
 #deposit:hover{
     cursor:pointer;
-    height:400px;
+    
 }
 #myForm {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
+  #myForm2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   #inputField {
     padding: 10px;
     border: 1px solid #ccc;

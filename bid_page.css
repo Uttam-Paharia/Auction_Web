@@ -49,18 +49,21 @@
     grid-template-columns:1fr 1fr 1fr 1fr;
     display:grid;
     margin-top:100px;
-    margin-left:40px
+    margin-left:40px;
+    padding-bottom:50px;
   }
 
   .product{
     display:flex;
     flex-direction:column;
-    height:400px;
+    height:450px;
     width:300px;
     /* border-left: solid rgb(200,200,200) 0.5px;
     border-bottom:solid rgb(200,200,200) 0.5px; */
-    align-items: left;
+    align-items: center;
     margin-top:20px;
+    border:grey 0.2px solid;
+    border-radius:30px;
 }
 .image{
     width:250px;
@@ -98,6 +101,11 @@
     margin-bottom:0px;
 }
 a{
+    text-decoration: none;
+    color:black;
+    
+}
+a:hover{
     text-decoration: none;
     color:black;
 }

@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
     $servername="localhost";
     $password="";
     $dbname="AUA";
@@ -47,10 +47,11 @@ ini_set('display_errors', 1);
 
     $text="";
     for($i=0;$i<$no_rows;$i++){
-        if($sell_buy=='SELL' && $is_sold=="YES"){
-            $text.='<div class="product"><img class="product_image" src="uploads/'.($arr[$i]->product_id).'.'.$image_ext.">".'<p class="name">'.($arr[$i]->product_name)."</p><p class='to_person'> Bought from ".$to_person."</p><p class='contact'> Contact: <span>".($arr[$i]->to_person_phone)."</span></p></div>";
+        if($arr[$i]->sell_buy=='SELL' && $arr[$i]->is_sold=="YES"){
+            $text.='<div class="product"><img class="product_image" src="uploads/'.($arr[$i]->product_id).'.'.($arr[$i]->image_ext).'">'.'<p class="name">'.($arr[$i]->product_name)."</p><p class='to_person'> Bought from ".$to_person."</p><p class='contact'> Contact: <span>".($arr[$i]->to_person_phone)."</span></p></div>";
+            
         }
-        else if($sell_buy='SELL'){
+        else if($arr[$i]->sell_buy='SELL'){
             $text.="<div class='product'>".
             "<img  class ='product_image' src='uploads/".($arr[$i]->product_id).".".($arr[$i]->image_ext)."'>".
             "<p class='to_person'>Unsold</p>

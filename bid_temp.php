@@ -28,19 +28,18 @@ ini_set('display_errors', 1);
             $this->image_ext = $ext;
         }
     }
-    $is_search=false;
     $num_row=0;
-    $query="SELECT * FROM `objects` limit 30";
+    $query="SELECT * FROM `objects` WHERE LOWER(product_name) ";
     $result = $conn->query($query);
     $no_rows=$result->num_rows;
     
     $arr= [];
     $to_person;
-    for($i=0;$i<$no_rows;$i++) 
-    {
+    for($i=0,$j=0;$j<$no_rows;$i++,$j++) 
+    {   
         $row = $result->fetch_assoc();
-        $auction_duration=$row['auction_duration'];
-        
+        $auction_duration=$row['auction_duration'];    
+       
         $post_time=$row['post_time'];
         $product_id=$row['product_id'];
         $postDateTime = new DateTime($post_time);
@@ -51,10 +50,10 @@ ini_set('display_errors', 1);
         {
             $rows = $results->fetch_assoc();
             $to_person=$rows['to_person'];
-            
+          
             
         }
-        
+       
 
 
         // Split auction duration into hours, minutes, and seconds
@@ -77,7 +76,7 @@ ini_set('display_errors', 1);
     $total_shells_person;
     $phone_person;
     $query="SELECT bidded_shells,total_shells,phone FROM `user_details` WHERE username='$to_person'";//GIVE TO PERSON
-    $result = $conn->query($query);
+    $results = $conn->query($query);
 
 if ($results === false) {
     die("Error retrieving data: " . $conn->error);
@@ -87,13 +86,13 @@ if ($results->num_rows > 0) {
     $row1 = $results->fetch_assoc();
     $bidded_shells_person=$row1['bidded_shells'];
     $total_shells_person=$row1['total_shells'];
-    $phone_person=$row1['phone'];
+    $phone_person=(int)$row1['phone'];
 }
 $current_price;
 $product_name;
 $ext;
 $query="SELECT current_price ,product_name,image_ext FROM `objects` WHERE product_id='$product_id'";//GIVE PRODUCTID
-$result = $conn->query($query);
+$results = $conn->query($query);
 if ($results === false) {
     die("Error retrieving data: " . $conn->error);
 }
@@ -101,14 +100,14 @@ if ($results === false) {
 if ($results->num_rows > 0) {
   $row2 = $results->fetch_assoc();
     $current_price=$row2['current_price'];
-    $product_name=$row2['$product_name'];
+    $product_name=$row2['product_name'];
     $ext=$row2['image_ext'];
 }
 $unbidded_shells_seller;
 $total_shells_seller;
 $phone_seller;
 $query="SELECT unbidded_shells,total_shells,phone FROM `user_details` WHERE username='$seller'";//GIVE $seller
-$result = $conn->query($query);
+$results = $conn->query($query);
 
 if ($results === false) {
 die("Error retrieving data: " . $conn->error);
@@ -131,15 +130,14 @@ $query="UPDATE `user_details` SET bidded_shells=$bidded_shells_person,total_shel
 $conn->query($query);
 $query="UPDATE `user_details` SET unbidded_shells=$unbidded_shells_seller,total_shells=$total_shells_seller WHERE username='$seller'";//seller
 $conn->query($query);
-$query="UPDATE `$seller` SET is_sold='YES',to_person_phone=$phone_person WHERE product_id=$product_id";//seller productid
+
+$query="UPDATE `$seller` SET is_sold='YES',to_person_phone=$phone_person WHERE product_id='$product_id'";//seller productid
 $conn->query($query);
 
 
-$query="INSERT INTO `to_person`(product_id,product_name,sell_buy,to_person,image_ext) VALUES('$product_id','$product_name','BUY','$seller','$ext')";
+$query="INSERT INTO `$to_person`(product_id,product_name,sell_buy,to_person,image_ext) VALUES('$product_id','$product_name','BUY','$seller','$ext')";
 $conn->query($query);
 
-$query="DELETE FROM `objects` WHERE product_id='$product_id'";
-$conn->query($query);
 
 }
 $query="DELETE FROM `objects` WHERE product_id='$product_id'";
@@ -171,41 +169,6 @@ $conn->query($query);
     
 
 ?>
-<!-- 
-  if($_SERVER['REQUEST_METHOD']==="POST"){
-    unset($arr);
-    $is_search=true;
-    $search=$_POST['search'];
-    $query="SELECT * FROM objects WHERE LOWER(product_name) LIKE LOWER('%'.$search.'%')";
-    $result=$conn->query($query);
-    $no_rows=$result->num_rows;
-    if($no_rows>0)
-    {
-    for($i=0;$i<$no_rows;$i++)
-    {
-      $row = $result->fetch_assoc();
-      $pr=new product($row['product_id'],$row['product_name'],$row['auction_duration'],$row['bid_time_increase'],$row['base_price'],$row['current_price'],$row['image_ext']);
-      $arr[]=$pr;
-    }
-    $text="";
-    for($i=0;$i<$no_rows;$i++){
-        $text.="<a href='"."product_page.php?product_id=".($arr[$i]->product_id)."'>".
-        "<div class='product' title='Click to Bid'>".
-        "<img  class='image' id='image' src='uploads/".($arr[$i]->product_id).".".($arr[$i]->image_ext)."'>".
-        "<div class='base_price'><p>Bid:<del id='base_price'>".($arr[$i]->base_price)."</del></p></div>".
-        "<p id='current_bid'>".($arr[$i]->current_price)."</p>".
-        "<p>Product Name: <span id='product_name'>".($arr[$i]->product_name)."</span></p>".
-        "</div></a>";
-    }
-    
-
-  }
-  else
-  {
-    $text="NO MATCH FOUND";
-  }
-}
-?> -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -213,23 +176,28 @@ $conn->query($query);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="CSS/style.css">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="bid_page.css">
+    <link rel="stylesheet" href="bid_page.css?v=<?php echo time(); ?>">
     <title>Bid</title>
   <link rel="icon" type="image/x-icon" href="projectimages/logo-white.png">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="projectimages/logo-white.png"><img src="projectimages/logo-white.png" width="50" height="50" alt="logo_image"></a>
-        <button   class="navbar-toggler" type="button"  data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="T  oggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="form-inline my-2 my-lg-0" action="bid_page_3.php">
-        <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='search' method="POST">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <?php
+          if($_SERVER['REQUEST_METHOD']==="POST"){
+            $_SESSION['search']=$_POST['search'];
+            header("location:search.php");
+          }
+        ?>
       </form>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item ">
@@ -245,8 +213,7 @@ $conn->query($query);
                     <a class="nav-link" href="sell_page_4.php">Sell</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="profile_2.php" title="<?php echo "Hello ".$_SESSION['username']; ?>"><i class="fa-solid fa-user" style="color: #99c1f1;font-size:30px;"></i></a>            
-                  </li>
+                <a class="nav-link" href="profile_2.php" title="<?php echo "Hello ".$_SESSION['username']; ?>"><i class="fa-solid fa-user" style="color: #99c1f1;font-size:30px;"></i></a>                </li>
             </ul>
            
     </div>
@@ -264,12 +231,7 @@ $conn->query($query);
             // $print="<script>".
             // "document.getElementById('grid').innerHTML=".$text
             // ."</script>";
-            
             echo $text;
-            // if($_SERVER['REQUEST_METHOD']==="POST"){
-
-            // }
-            
         ?>
         <!-- <a href="">
             <div class="product" title="Click to Bid">
@@ -281,7 +243,7 @@ $conn->query($query);
         </a> -->
       
     </div>
-    <footer class="text-center text-lg-start bg-dark text-muted" style="margin-top:45px;">
+    <footer class="text-center text-lg-start bg-dark text-muted">
   <!-- Section: Social media -->
   <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
     <!-- Left -->

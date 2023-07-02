@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 $servername = "localhost";
 $password = "";
 $databasename = "AUA";
@@ -8,6 +8,9 @@ $databasename = "AUA";
 // CREATE CONNECTION
 $conn = new mysqli($servername, "root", $password, $databasename);
 session_start();
+if(!isset($_SESSION['username'])){
+    header("location: signin.php");
+  }
 $currentURL = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $equalsPos = strpos($currentURL, '=');
 $product_id = substr($currentURL, $equalsPos + 1);

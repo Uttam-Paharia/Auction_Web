@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
     $servername="localhost";
     $username="root";
     $password="";
@@ -8,6 +8,9 @@ ini_set('display_errors', 1);
     
     $conn=mysqli_connect($servername,$username,$password,$dbname);
     session_start();
+    if(!isset($_SESSION['username'])){
+      header("location: signin.php");
+    }
     $_SESSION['username'];
     class product { 
         public $product_id;
@@ -29,7 +32,7 @@ ini_set('display_errors', 1);
         }
     }
     $num_row=0;
-    $query="SELECT * FROM `objects` limit 30";
+    $query="SELECT * FROM `objects`";
     $result = $conn->query($query);
     $no_rows=$result->num_rows;
     
@@ -160,8 +163,8 @@ $conn->query($query);
         $text.="<a href='"."product_page.php?product_id=".($arr[$i]->product_id)."'>".
         "<div class='product' title='Click to Bid'>".
         "<img  class='image' id='image' src='uploads/".($arr[$i]->product_id).".".($arr[$i]->image_ext)."'>".
-        "<div class='base_price'><p>Bid:<del id='base_price'>".($arr[$i]->base_price)."</del></p></div>".
-        "<p id='current_bid'>".($arr[$i]->current_price)."</p>".
+        "<div class='base_price'><p>Base Price:<del id='base_price'>".($arr[$i]->base_price)."</del></p></div>".
+        "<small style='font-size:20px;'>Current Bid:</small><p id='current_bid'>".($arr[$i]->current_price)."</p>".
         "<p>Product Name: <span id='product_name'>".($arr[$i]->product_name)."</span></p>".
         "</div></a>";
     }
@@ -190,8 +193,6 @@ $conn->query($query);
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item ">

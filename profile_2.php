@@ -1,7 +1,10 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 session_start();
+if(!isset($_SESSION['username'])){
+  header("location: signin.php");
+}
 $servername = "localhost";
 $password = "";
 $databasename = "AUA";
@@ -47,7 +50,11 @@ if ($result->num_rows > 0) {
   // Print the values of total_shells, bided_shells, and unbided_shells
   $name = $row['name'];
   $total_shells = $row['total_shells'];
-  $bidded_shells = $row['bidded_shells'];
+  // $bidded_shells = $row['bidded_shells'];
+  if($row['bidded_shells']<0){
+    $bidded_shells=(-1)*$row['bidded_shells'];
+  }
+  else $bidded_shells=$row['$bidded_shells'];
   $unbidded_shells = $row['unbidded_shells'];
   $email = $row['email'];
   $phone = $row['phone'];
@@ -101,6 +108,9 @@ if ($result->num_rows > 0) {
         </li>
         <li class="nav-item ">
           <a class="nav-link" href="sell_page_4.php">Sell</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout.php">Logout</a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="profile_2.php" title="<?php echo "Hello " . $_SESSION['username']; ?>"><span
